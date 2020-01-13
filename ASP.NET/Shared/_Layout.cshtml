@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>>TEMPLATE</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/ptemph.css" rel="stylesheet" />
+
+    <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <!-- top checkerd border -->
+        <div style="background-image: url('../../Images/boxbanner.png'); repeat-x; position:absolute; left:0px; right:25px; top:0px; height:25px; width:100%;"></div>
+        <br />
+
+        <!-- full Portillo's logo, left justified -->
+        <img style="position:absolute; left:10px; top:50px;" src="~/Images/p_full_logo.png" />
+        <img style="position:absolute; right:20px; top:68px;" width="300px;" src="~/Images/RaoLogoB.png" />
+
+        <div class="h1">Restaurant Automated Ordering</div>
+        <div class="clockbox" style="text-align: center"></div>
+    </div>
+    
+    <br />
+
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <div>
+            @Html.ActionLink("Home", "Index", "RAOHome")
+            <img style="float:center; left:764px; width:5px; height: auto;" src="~/Images/blks.png" />
+            @Html.ActionLink("Table Maintenance", "Index", "TableMaintenance")
+            <img style="float:center; left:1042px; width:5px; height: auto;" src="~/Images/blks.png" />
+            @Html.ActionLink("Emergency Orders", "Index", "EmergencyOrders")
+            <img style="float:center; left:1042px; width:5px; height: auto;" src="~/Images/blks.png" />
+            @Html.ActionLink("Future Orders", "Index", "FutureOrders")
+            <img style="float:center; left:1042px; width:5px; height: auto;" src="~/Images/blks.png" />
+            @Html.ActionLink("Logoff", "logoff", "RAOHome")
+        </div>
+        <div style="background:url('../../images/bline.png') repeat-x; position:absolute; left:0px; right:25px; height:50px; width:100%;"></div>
+    </div>
+    <!-- all top menu items should be placed before this line -->
+    
+    <div class="row">
+        <div class="column" style="width: 5%;">
+            
+        </div>
+
+        <div class="column" style="width: 90%;">
+            <div class="center">@RenderBody()</div>
+        </div>
+
+        <div class="column" style="width: 5%;">
+            
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+<!-- Clock Script. Keep below body -->
+<script type="text/javascript">
+    var tday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var tmonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    function GetClock() {
+        var d = new Date();
+        var nday = d.getDay(), nmonth = d.getMonth(), ndate = d.getDate(), nyear = d.getFullYear();
+        var nhour = d.getHours(), nmin = d.getMinutes(), ap;
+        if (nhour == 0) { ap = " AM"; nhour = 12; }
+        else if (nhour < 12) { ap = " AM"; }
+        else if (nhour == 12) { ap = " PM"; }
+        else if (nhour > 12) { ap = " PM"; nhour -= 12; }
+
+        if (nmin <= 9) nmin = "0" + nmin;
+
+        var clocktext = "<span style=\"font:30px Courgette-Regular; color: rgb(210, 38, 48);\">" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ap + "";
+        var obj = document.querySelectorAll('.clockbox');
+        for (var i in obj) {
+            obj[i].innerHTML = clocktext;
+        }
+    }
+
+    GetClock();
+    setInterval(GetClock, 1000);
+</script>
+
+</html>
